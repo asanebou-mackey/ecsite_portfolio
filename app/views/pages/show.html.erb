@@ -1,2 +1,7 @@
-<h1>こんにちは、<%= current_user.username %>さん</h1>
-<p>ユーザー用ページです。</p>
+<h1>プロフィール</h1>
+<p>プロフィール画像</p>
+<%= image_tag current_user.image.url %>
+<p><%= current_user.name %></p>
+<p><%= current_user.number %></p>
+<p><%= current_user.address %></p>
+<%= link_to '編集する', edit_user_registration_path %>

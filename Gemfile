@@ -58,3 +58,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Devise
 gem 'devise'
 gem 'omniauth-twitter'
+
+#CarrierWave
+gem 'carrierwave', '~> 2.0'
