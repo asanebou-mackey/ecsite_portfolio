@@ -6,7 +6,8 @@
 
   <h4> メールアドレス： <%= current_user.email %> </h4>
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
-  <%= link_to 'プロフィール', pages_show_path(:id) %>
+  <%= link_to 'プロフィール編集', edit_user_registration_path %>
+  <%= link_to 'プロフィール', pages_index_path(current_user.id) %>
 <% else %>
   <!-- ユーザーがログインしていなかった時の処理 -->
   <h2> 現在ログインしていません </h2>
