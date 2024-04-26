@@ -1,0 +1,17 @@
+<h1>ブランド登録ページ</h1>
+<p>ブランド名</p>
+<p>ブランドロゴ画像</p>
+<%= form_with model: @brand do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.label :ブランド名 %>
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+  <div class="field">
+    <%= f.label :ブランドロゴ画像 %>
+    <%= f.file_field :image %>
+  </div>
+  <div>
+    <%= f.submit '登録する' %>
+  </div>
+<% end %>
