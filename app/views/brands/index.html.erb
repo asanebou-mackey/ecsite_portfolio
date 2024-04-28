@@ -1,4 +1,9 @@
 <h1>ブランド一覧ページ</h1>
-<p>ブランド名</p>
-<p>ブランドロゴ画像</p>
-<%= link_to 'ブランド登録ページ', brands_new_path %>
+<% @brands.each do |brand| %>
+  <p>ブランド名</p>
+  <p><%= brand.name %></p>
+  <p>ブランドロゴ画像</p>
+  <%= image_tag brand.image.url %>
+  <%= link_to '編集ページ', edit_brand_path(brand.id) %>
+<% end %>
+<%= link_to 'ブランド登録ページ', new_brand_path %>

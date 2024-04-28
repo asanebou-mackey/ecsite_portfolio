@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  get 'brands/index'
-  get 'brands/new', to: 'brands#new'
-  post 'brands', to: 'brands#create'
+  resources :brands
   devise_for :users
   root 'pages#index'
   get 'mypage/:id', to: 'mypages#show'

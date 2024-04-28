@@ -1,5 +1,6 @@
 class BrandsController < ApplicationController
   def index
+    @brands = Brand.all
   end
 
   def new
@@ -13,6 +14,20 @@ class BrandsController < ApplicationController
       redirect_to brands_index_path
     else
       flash.now[:notice] = "登録に失敗しました" 
+      render :new
+    end
+  end
+
+  def edit
+    @brand = Brand.find(params[:id])
+  end
+
+  def update
+    @brand = Brand.find(params[:id])
+    if @brand.update(brand_params)
+      redirect_to brands_path, notice: "編集に成功しました"
+    else
+      flash.now[:notice] = "編集に失敗しました"
       render :new
     end
   end
