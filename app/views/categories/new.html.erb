@@ -1,0 +1,12 @@
+<h1>カテゴリー登録ページ</h1>
+<p>Find me in app/views/categories/new.html.erb</p>
+<%= form_with model: @category do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.label :カテゴリー名 %>
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+  <div>
+    <%= f.submit '登録する' %>
+  </div>
+<% end %>
