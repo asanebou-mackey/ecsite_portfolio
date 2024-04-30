@@ -11,7 +11,7 @@ class BrandsController < ApplicationController
     @brand = Brand.new(brand_params)
     if @brand.save
       flash[:notice] = "登録に成功しました"
-      redirect_to brands_index_path
+      redirect_to brands_path
     else
       flash.now[:notice] = "登録に失敗しました" 
       render :new
@@ -29,6 +29,16 @@ class BrandsController < ApplicationController
     else
       flash.now[:notice] = "編集に失敗しました"
       render :new
+    end
+  end
+
+  def destroy
+    @brand = Brand.find(params[:id])
+    if @brand.destroy
+      redirect_to brands_path, notice: "削除に成功しました"
+    else
+      flash.now[:danger] = "削除に失敗しました"
+      render :index
     end
   end
 
