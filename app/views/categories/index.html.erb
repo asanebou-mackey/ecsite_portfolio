@@ -1,7 +1,7 @@
 <h1>カテゴリー一覧ページ</h1>
 <p>Find me in app/views/categories/index.html.erb</p>
 <% @categories.each do |category| %>
-  <p>ブランド名</p>
+  <p>カテゴリー名</p>
   <p><%= category.name %></p>
   <%= link_to 'カテゴリー編集ページ', edit_category_path(category.id) %>
   <%= button_to 'カテゴリー削除', category_path(category.id), method: :delete, data: {confirm: "削除しますか？"} %>
