@@ -1,0 +1,80 @@
+<h1>アイテム一覧画面</h1>
+<%= link_to 'アイテム登録ページ', new_item_path %>
+<% @items.each do |item| %>
+  <p>アイテム名</p>
+  <p><%= item.name %></p>
+  <p>アイテム価格</p>
+  <p><%= item.price %></p>
+  <p>アイテム概要</p>
+  <p><%= item.description %></p>
+  <p>サイズ</p>
+  <p><%= item.size %></p>
+  <p>
+    <% if item.size == 1 %>
+      S
+    <% elsif item.size == 2 %>
+      M
+    <% elsif item.size == 3 %>
+      L
+    <% else %>
+      XL
+    <% end %>
+  </p>
+  <p>
+    <% if item.size == "1" %>
+      S
+    <% elsif item.size == "2" %>
+      M
+    <% elsif item.size == "3" %>
+      L
+    <% else %>
+      XL
+    <% end %>
+  </p>
+
+  <%= item.size.is_a?(String) %>
+
+  <p>カラー</p>
+  <p>
+    <% if item.color == "1" %>
+      ホワイト
+    <% elsif item.color == "2" %>
+      グレー
+    <% elsif item.color == "3" %>
+      ネイビー
+    <% elsif item.color == "4" %>
+      ベージュ
+    <% elsif item.color == "5" %>
+      レッド
+    <% elsif item.color == "6" %>
+      ブルー
+    <% elsif item.color == "7" %>
+      グリーン
+    <% elsif item.color == "8" %>
+      イエロー
+    <% elsif item.color == "9" %>
+      オレンジ
+    <% elsif item.color == "10" %>
+      ピンク
+    <% elsif item.color == "12" %>
+      パープル
+    <% end %>
+  </p>
+  <p>
+    <% if item.color == 1 %>
+      ホワイト
+    <% elsif item.color == 2 %>
+      グレー
+    <% elsif item.color == 3 %>
+      ネイビー
+    <% else %>
+      ベージュ
+    <% end %>
+  </p>
+  <p>性別</p>
+  <p><%= item.gender %></p>
+  <p>アイテム画像</p>
+  <%= image_tag item.image.url %>
+  <%= link_to '編集ページ', edit_item_path(item.id) %>
+  <%= button_to 'アイテム削除', item_path(item.id), method: :delete, data: {confirm: "削除しますか？"} %>
+<% end %>
