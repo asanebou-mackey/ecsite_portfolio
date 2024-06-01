@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-    if Item.update(item_params)
+    if @item.update(item_params)
       flash[:notice] = "登録に成功しました"
       redirect_to items_path
     else
