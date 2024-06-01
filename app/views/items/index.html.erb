@@ -1,0 +1,26 @@
+<h1>アイテム一覧画面</h1>
+<%= link_to 'アイテム登録ページ', new_item_path %>
+<% @items.each do |item| %>
+  <p>アイテム名</p>
+  <p><%= item.name %></p>
+  <p>アイテム価格</p>
+  <p><%= item.price %></p>
+  <p>アイテム概要</p>
+  <p><%= item.description %></p>
+  <p>サイズ</p>
+  <p>
+    <%= size_to_size_label(item.size) %>
+  </p>
+  <p>カラー</p>
+  <p>
+    <%= color_to_color_label(item.color) %>
+  </p>
+  <p>性別</p>
+  <p>
+    <%= gender_to_gender_label(item.gender) %>
+  </p>
+  <p>アイテム画像</p>
+  <%= image_tag item.image.url %>
+  <%= link_to '編集ページ', edit_item_path(item.id) %>
+  <%= button_to 'アイテム削除', item_path(item.id), method: :delete, data: {confirm: "削除しますか？"} %>
+<% end %>

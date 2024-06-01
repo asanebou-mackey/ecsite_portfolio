@@ -2,6 +2,7 @@
 <p>トップページです。</p>
 <%= link_to 'ブランド登録(管理者用)', brands_path %>
 <%= link_to 'カテゴリー登録(管理者用)', categories_path %>
+<%= link_to 'アイテム登録(管理者用)', items_path %>
 
 <% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
   <!-- ユーザーがログインしていた時の処理 -->

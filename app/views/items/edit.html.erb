@@ -1,0 +1,43 @@
+<h1>アイテム編集ページ</h1>
+<%= form_with model: @item do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.label :アイテム画像 %>
+    <%= f.file_field :image %>
+  </div>
+  <div class="field">
+    <%= f.label :アイテム名 %>
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+  <div class="field">
+    <%= f.label :アイテム価格 %>
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :アイテム概要 %>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :サイズ %>
+    <%= f.select :size, [["S", 1], ["M", 2], ["L", 3], ["XL", 4]], include_blank: "サイズを選択して下さい", class: 'size_select' %>
+  </div>
+  <div class="field">
+    <%= f.label :カラー %>
+    <%= f.select :color, [["ホワイト", 1], ["グレー", 2], ["ネイビー", 3], ["ベージュ", 4], ["レッド", 5], ["ブルー", 6], ["グリーン", 7], ["イエロー", 8], ["オレンジ", 9], ["ピンク", 10], ["パープル", 11]], include_blank: "カラーを選択して下さい", class: 'color_select' %>
+  </div>
+  <div class="field">
+    <%= f.label :性別 %>
+    <%= f.select :gender, [["男性", 1], ["女性", 2], ["その他", 9]], include_blank: "性別を選択して下さい", class: 'gender_select' %>
+  </div>
+  <div class="field">
+    <%= f.label :ブランド %>
+    <%= f.collection_select :brand_id, Brand.all, :id, :name, include_blank: "選択して下さい" %>
+  </div>
+  <div class="field">
+    <%= f.label :カテゴリー %>
+    <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "選択して下さい" %>
+  </div>
+  <div>
+    <%= f.submit '登録する' %>
+  </div>
+<% end %>
