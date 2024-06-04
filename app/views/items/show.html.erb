@@ -1,0 +1,22 @@
+<h1>アイテム詳細ページ</h1>
+<p>アイテム画像</p>
+<%= image_tag @item.image.url %>
+<p>アイテム名</p>
+<p><%= @item.name %></p>
+<p>アイテム価格</p>
+<p><%= @item.price %></p>
+<p>アイテム概要</p>
+<p><%= @item.description %></p>
+<p>アイテムサイズ</p>
+<p><%= size_to_size_label(@item.size) %></p>
+<p>アイテムカラー</p>
+<p><%= color_to_color_label(@item.color) %></p>
+<p>性別</p>
+<p><%= gender_to_gender_label(@item.gender) %></p>
+<p>ブランド</p>
+<p><%= @item.brand.name %></p>
+<p>カテゴリー</p>
+<p><%= @item.category.name %></p>
+<p>数量</p>
+<p>1個</p>
+<%= button_to "カートに入れる", "/" %>
