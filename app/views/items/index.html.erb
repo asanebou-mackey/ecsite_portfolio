@@ -22,5 +22,6 @@
   <p>アイテム画像</p>
   <%= image_tag item.image.url %>
   <%= link_to '編集ページ', edit_item_path(item.id) %>
+  <%= link_to '詳細ページ', item_path(item.id) %>
   <%= button_to 'アイテム削除', item_path(item.id), method: :delete, data: {confirm: "削除しますか？"} %>
 <% end %>

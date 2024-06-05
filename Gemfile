@@ -64,3 +64,6 @@ gem 'carrierwave', '~> 2.0'
 
 #日本語化
 gem 'rails-i18n'
+
+#デバックツール
+gem 'pry-rails'
