@@ -6,4 +6,5 @@ class User < ApplicationRecord
          :timeoutable, :trackable, :omniauthable
 
   mount_uploader :image, ImageUploader
+  has_many :carts
 end
