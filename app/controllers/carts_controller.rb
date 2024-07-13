@@ -31,11 +31,11 @@ class CartsController < ApplicationController
   end
 
   def increase_or_create(item_id)
-    cart = current_user.carts.find_by(item_id)
+    cart = Cart.find_by(user_id: current_user.id, item_id: item_id)
     if cart
       cart.increment!(:amount, 1)
     else
-      current_user.carts.build(item_id: item_id).save
+      current_user.carts.build(item_id: item_id, amount: 1).save
     end
   end
 

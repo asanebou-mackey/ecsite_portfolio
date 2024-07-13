@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     member do
       post 'increase'
       post 'decrease'
+      post 'destroy'
     end
   end
   resources :items
