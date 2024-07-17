@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_05_16_161149) do
+ActiveRecord::Schema.define(version: 2024_06_06_094557) do
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.integer "amount"
+    t.integer "user_id", null: false
+    t.integer "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_carts_on_item_id"
+    t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -72,6 +82,8 @@ ActiveRecord::Schema.define(version: 2024_05_16_161149) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "carts", "items"
+  add_foreign_key "carts", "users"
   add_foreign_key "items", "brands"
   add_foreign_key "items", "categories"
 end

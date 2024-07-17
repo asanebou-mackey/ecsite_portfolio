@@ -19,4 +19,7 @@
 <p><%= @item.category.name %></p>
 <p>数量</p>
 <p>1個</p>
-<%= button_to "カートに入れる", "/" %>
+<%= form_with model: @cart do |f| %>
+  <%= f.hidden_field :item_id, :value => @item.id %>
+  <%= f.submit "カートに入れる" %>
+<% end %>

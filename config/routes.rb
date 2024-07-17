@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  resources :carts, only: %i[index create destroy] do
+    member do
+      post 'increase'
+      post 'decrease'
+      post 'destroy'
+    end
+  end
   resources :items
   resources :categories
   resources :brands
