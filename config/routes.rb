@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post 'destroy'
     end
   end
+  resources :orders
   resources :items
   resources :categories
   resources :brands

@@ -4,6 +4,7 @@ class CartsController < ApplicationController
 
   def index
     @carts = current_user.carts
+    @order = Order.new
   end
 
   def create

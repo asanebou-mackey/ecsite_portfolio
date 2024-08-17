@@ -7,4 +7,5 @@ class User < ApplicationRecord
 
   mount_uploader :image, ImageUploader
   has_many :carts
+  has_many :orders
 end
