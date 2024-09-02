@@ -11,4 +11,5 @@ class Item < ApplicationRecord
   belongs_to :brand
   belongs_to :category
   has_many :carts
+  has_many :order_details
 end
