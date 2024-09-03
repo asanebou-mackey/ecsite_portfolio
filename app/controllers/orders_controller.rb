@@ -21,7 +21,6 @@ class OrdersController < ApplicationController
       @quantity = cart.amount
       @price = cart.item.price * cart.amount
       @order_detail = OrderDetail.new(price: @price, quantity: @quantity, order_id: @order.id, item_id: cart.item_id)
-      @order_detail.save!
       @order_detail.save
     end
 
