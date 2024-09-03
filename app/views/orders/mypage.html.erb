@@ -1,0 +1,23 @@
+<h1>注文履歴</h1>
+<% @orders.each do |order| %>
+  <h2>注文番号: <%= order.id %></h2>
+  <table>
+    <thead>
+      <tr>
+        <th>商品名</th>
+        <th>数量</th>
+        <th>価格</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order_details = OrderDetail.where(order_id: order.id) %>
+      <% @order_details.each do |order_detail| %>
+        <tr>
+          <td><%= order_detail.item.name %></td>
+          <td><%= order_detail.quantity %></td>
+          <td><%= order_detail.price %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
