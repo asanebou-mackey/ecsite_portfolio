@@ -7,12 +7,15 @@ Rails.application.routes.draw do
     end
   end
   resources :orders
-  resources :items
+  resources :items do
+    resources :favorites, only: [:create, :destroy]
+  end
   resources :categories
   resources :brands
   devise_for :users
   root 'pages#index'
   get '/mypage/order', to: 'orders#mypage'
+  get 'mypage/:id/favorite', to: 'mypages#favorite'
   get 'mypage/:id', to: 'mypages#show'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

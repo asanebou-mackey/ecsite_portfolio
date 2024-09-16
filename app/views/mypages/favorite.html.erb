@@ -1,0 +1,12 @@
+<p>名前</p>
+<p><%= current_user.name %></p>
+
+<% if @favorites.size != 0 %>
+  <% @favorites.each do |favorite| %>
+    <p><%= image_tag favorite.item.image.url %></p>
+    <p><%= favorite.item.name %></p>
+    <p><%= favorite.item.price %></p>
+  <% end %>
+<% else %>
+  <p>お気に入りはありません。</p>
+<% end %>
