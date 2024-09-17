@@ -9,6 +9,7 @@
   <!-- ユーザーがログインしていた時の処理 -->
   <%= link_to 'プロフィール編集', edit_user_registration_path %>
   <%= link_to 'マイページ', "/mypage/#{current_user.id}" %>
+  <%= link_to 'お気に入り一覧', "/mypage/#{current_user.id}/favorite/" %>
 <% else %>
   <!-- ユーザーがログインしていなかった時の処理 -->
   <h2> 現在ログインしていません </h2>

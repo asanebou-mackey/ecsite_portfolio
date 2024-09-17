@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_08_19_152154) do
+ActiveRecord::Schema.define(version: 2024_09_06_004047) do
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 2024_08_19_152154) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_favorites_on_item_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -103,6 +112,8 @@ ActiveRecord::Schema.define(version: 2024_08_19_152154) do
 
   add_foreign_key "carts", "items"
   add_foreign_key "carts", "users"
+  add_foreign_key "favorites", "items"
+  add_foreign_key "favorites", "users"
   add_foreign_key "items", "brands"
   add_foreign_key "items", "categories"
   add_foreign_key "order_details", "items"
