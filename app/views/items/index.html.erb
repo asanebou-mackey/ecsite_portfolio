@@ -1,5 +1,10 @@
 <h1>アイテム一覧画面</h1>
 <%= link_to 'アイテム登録ページ', new_item_path %>
+<%= link_to '新しい順', items_path(latest: "true") %>
+<%= link_to '古い順', items_path(old: "true") %>
+<%= link_to 'いいね順', items_path(most_favorited: "true") %>
+<%= link_to '価格が高い順', items_path(expensive: "true") %>
+<%= link_to '価格が安い順', items_path(cheap: "true") %>
 <% @items.each do |item| %>
   <p>アイテム名</p>
   <p><%= item.name %></p>
