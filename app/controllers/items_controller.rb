@@ -1,6 +1,18 @@
 class ItemsController < ApplicationController
   def index
-    @items = Item.all
+    if params[:latest]
+      @items = Item.latest
+    elsif params[:old]
+      @items = Item.old
+    elsif params[:most_favorited]
+      @items = Item.most_favorited
+    elsif params[:expensive]
+      @items = Item.expensive
+    elsif params[:cheap]
+      @items = Item.cheap
+    else
+      @items = Item.all
+    end
   end
 
   def show
