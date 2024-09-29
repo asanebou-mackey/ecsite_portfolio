@@ -67,3 +67,6 @@ gem 'rails-i18n'
 
 #デバックツール
 gem 'pry-rails'
+
+#検索機能
+gem 'ransack'
