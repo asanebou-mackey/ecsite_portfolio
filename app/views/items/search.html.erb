@@ -30,28 +30,28 @@
 <%= link_to 'いいね順', items_path(most_favorited: "true") %>
 <%= link_to '価格が高い順', items_path(expensive: "true") %>
 <%= link_to '価格が安い順', items_path(cheap: "true") %>
-<% @items.each do |item| %>
+<% @results.each do |result| %>
   <p>アイテム名</p>
-  <p><%= item.name %></p>
+  <p><%= result.name %></p>
   <p>アイテム価格</p>
-  <p><%= item.price %></p>
+  <p><%= result.price %></p>
   <p>アイテム概要</p>
-  <p><%= item.description %></p>
+  <p><%= result.description %></p>
   <p>サイズ</p>
   <p>
-    <%= size_to_size_label(item.size) %>
+    <%= size_to_size_label(result.size) %>
   </p>
   <p>カラー</p>
   <p>
-    <%= color_to_color_label(item.color) %>
+    <%= color_to_color_label(result.color) %>
   </p>
   <p>性別</p>
   <p>
-    <%= gender_to_gender_label(item.gender) %>
+    <%= gender_to_gender_label(result.gender) %>
   </p>
   <p>アイテム画像</p>
-  <%= image_tag item.image.url %>
-  <%= link_to '編集ページ', edit_item_path(item.id) %>
-  <%= link_to '詳細ページ', item_path(item.id) %>
-  <%= button_to 'アイテム削除', item_path(item.id), method: :delete, data: {confirm: "削除しますか？"} %>
+  <%= image_tag result.image.url %>
+  <%= link_to '編集ページ', edit_item_path(result.id) %>
+  <%= link_to '詳細ページ', item_path(result.id) %>
+  <%= button_to 'アイテム削除', item_path(result.id), method: :delete, data: {confirm: "削除しますか？"} %>
 <% end %>

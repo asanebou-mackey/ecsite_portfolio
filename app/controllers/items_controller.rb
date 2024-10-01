@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :set_q, only: [:index, :search]
+
   def index
     if params[:latest]
       @items = Item.latest
@@ -58,6 +60,14 @@ class ItemsController < ApplicationController
       flash.now[:danger] = "削除に失敗しました"
       render :index
     end
+  end
+
+  def search
+    @results = @q.result
+  end
+
+  def set_q
+    @q = Item.ransack(params[:q])
   end
 
   private
