@@ -21,5 +21,6 @@ Rails.application.routes.draw do
   get '/mypage/order', to: 'orders#mypage'
   get 'mypage/:id/favorite', to: 'mypages#favorite'
   get 'mypage/:id', to: 'mypages#show'
+  post '/pages/guest_sign_in', to: 'pages#guest_sign_in'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
