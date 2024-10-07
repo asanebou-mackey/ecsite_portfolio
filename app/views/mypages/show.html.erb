@@ -1,6 +1,10 @@
 <h1>マイページ</h1>
 <p>プロフィール画像</p>
-<%= image_tag current_user.image.url %>
+<% if current_user.image.present? %>
+  <%= image_tag current_user.image_url %>
+<% else %>
+  <%= image_tag "default_icon.png" %>
+<% end %>
 <p>名前</p>
 <p><%= current_user.name %></p>
 <p>電話番号</p>
