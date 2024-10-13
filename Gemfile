@@ -70,3 +70,9 @@ gem 'pry-rails'
 
 #検索機能
 gem 'ransack'
+
+#テスト
+group :development, :test do
+  gem 'rspec-rails', '~> 5.0'
+  gem 'factory_bot_rails'
+end
