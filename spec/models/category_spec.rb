@@ -8,7 +8,7 @@ RSpec.describe Category, type: :model do
       expect(category).to be_valid
     end
 
-    it "カテゴリーが空欄の場合に無効" do
+    it "カテゴリー名が空欄の場合に無効" do
       category = FactoryBot.build(:category, name: "")
       expect(category).to be_invalid
     end
