@@ -31,10 +31,10 @@
                   <%= link_to 'Home', root_path, class: "nav-link active", 'aria-current' => 'page' %>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">人気アイテム</a>
+                  <%= link_to '人気アイテム', items_path(most_favorited: "true"), class: "nav-link" %>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">新着アイテム</a>
+                  <%= link_to '新着アイテム', items_path(latest: "true"), class: "nav-link" %>
                 </li>
                 <% unless user_signed_in? %>
                   <li class="nav-item">
