@@ -1,57 +1,77 @@
-<h1>アイテム一覧画面</h1>
-<h1>アイテム検索</h1>
-<%= search_form_for @q, url: search_items_path do |f| %>
-  <%= f.label :name_cont, 'アイテム名' %>
-  <%= f.search_field :name_cont %>
-  <br>
-  <%= f.label :brand_name_cont, 'ブランド名' %>
-  <%= f.search_field :brand_name_cont %>
-  <br>
-  <%= f.label :category_name_cont, 'カテゴリー名' %>
-  <%= f.search_field :category_name_cont %>
-  <br>
-  <%= f.radio_button :color_eq, '' %>指定しない
-  <%= f.radio_button :color_eq, '1' %>ホワイト
-  <%= f.radio_button :color_eq, '2' %>グレー
-  <%= f.radio_button :color_eq, '3' %>ネイビー
-  <%= f.radio_button :color_eq, '4' %>ベージュ
-  <%= f.radio_button :color_eq, '5' %>レッド
-  <%= f.radio_button :color_eq, '6' %>ブルー
-  <%= f.radio_button :color_eq, '7' %>グリーン
-  <%= f.radio_button :color_eq, '8' %>イエロー
-  <%= f.radio_button :color_eq, '9' %>オレンジ
-  <%= f.radio_button :color_eq, '10' %>ピンク
-  <%= f.radio_button :color_eq, '11' %>パープル
-  <%= f.submit '検索' %>
-<% end %>
-<%= link_to 'アイテム登録ページ', new_item_path %>
-<%= link_to '新しい順', items_path(latest: "true") %>
-<%= link_to '古い順', items_path(old: "true") %>
-<%= link_to 'いいね順', items_path(most_favorited: "true") %>
-<%= link_to '価格が高い順', items_path(expensive: "true") %>
-<%= link_to '価格が安い順', items_path(cheap: "true") %>
-<% @results.each do |result| %>
-  <p>アイテム名</p>
-  <p><%= result.name %></p>
-  <p>アイテム価格</p>
-  <p><%= result.price %></p>
-  <p>アイテム概要</p>
-  <p><%= result.description %></p>
-  <p>サイズ</p>
-  <p>
-    <%= size_to_size_label(result.size) %>
-  </p>
-  <p>カラー</p>
-  <p>
-    <%= color_to_color_label(result.color) %>
-  </p>
-  <p>性別</p>
-  <p>
-    <%= gender_to_gender_label(result.gender) %>
-  </p>
-  <p>アイテム画像</p>
-  <%= image_tag result.image.url %>
-  <%= link_to '編集ページ', edit_item_path(result.id) %>
-  <%= link_to '詳細ページ', item_path(result.id) %>
-  <%= button_to 'アイテム削除', item_path(result.id), method: :delete, data: {confirm: "削除しますか？"} %>
-<% end %>
+<h1 class="fs-3 mb-5 mt-3">アイテム一覧</h1>
+<div class="container">
+  <%= search_form_for @q, url: search_items_path do |f| %>
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <%= f.label :name_cont, 'アイテム名', class: 'form-label' %>
+      </div>
+      <div class="col-md-9">
+        <%= f.search_field :name_cont, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <%= f.label :brand_name_cont, 'ブランド名', class: 'form-label' %>
+      </div>
+      <div class="col-md-9">
+        <%= f.search_field :brand_name_cont, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <%= f.label :category_name_cont, 'カテゴリー名', class: 'form-label' %>
+      </div>
+      <div class="col-md-9">
+        <%= f.search_field :category_name_cont, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label class="form-label">カラー</label>
+      </div>
+      <div class="col-md-9">
+        <%= f.select :color_eq, [['指定しない', ''], ['ホワイト', '1'], ['グレー', '2'], ['ネイビー', '3'], ['ベージュ', '4'], ['レッド', '5'], ['ブルー', '6'], ['グリーン', '7'], ['イエロー', '8'], ['オレンジ', '9'], ['ピンク', '10'], ['パープル', '11']], { include_blank: true }, { class: 'form-select' } %>
+      </div>
+    </div>
+    <div class="mb-5 mt-5">
+      <%= f.submit '検索', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
+<div class="container">
+  <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-5 mb-5" role="group" aria-label="アイテム並び替え">
+    <div class="col">
+      <%= link_to '新しい順', items_path(latest: "true"), class: 'btn btn-outline-secondary w-100' %>
+    </div>
+    <div class="col">
+      <%= link_to '古い順', items_path(old: "true"), class: 'btn btn-outline-secondary w-100' %>
+    </div>
+    <div class="col">
+      <%= link_to 'いいね順', items_path(most_favorited: "true"), class: 'btn btn-outline-secondary w-100' %>
+    </div>
+    <div class="col">
+      <%= link_to '価格が高い順', items_path(expensive: "true"), class: 'btn btn-outline-secondary w-100' %>
+    </div>
+    <div class="col">
+      <%= link_to '価格が安い順', items_path(cheap: "true"), class: 'btn btn-outline-secondary w-100' %>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% @results.each do |result| %>
+      <div class="col">
+        <%= link_to item_path(result.id), class: "card-link text-decoration-none text-dark" do %>
+          <div class="card h-100">
+            <%= image_tag result.image.url, class: "card-img-top img-fluid", alt: result.name %>
+            <div class="card-body">
+              <h5 class="card-title"><%= result.name %></h5>
+              <p class="card-text">価格: <%= result.price %>円</p>
+              <p class="card-text">サイズ: <%= size_to_size_label(result.size) %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
