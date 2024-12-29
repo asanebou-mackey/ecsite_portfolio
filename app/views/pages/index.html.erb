@@ -1,17 +1,108 @@
 <h1>ようこそ</h1>
 <p>トップページです。</p>
-<%= link_to 'ブランド登録(管理者用)', brands_path %>
-<%= link_to 'カテゴリー登録(管理者用)', categories_path %>
-<%= link_to 'アイテム登録(管理者用)', items_path %>
-<%= link_to '注文履歴', mypage_order_path %>
-<%= link_to 'アイテム登録ページ', new_item_path %>
 
-<% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
-  <!-- ユーザーがログインしていた時の処理 -->
-  <%= link_to 'プロフィール編集', edit_user_registration_path %>
-  <%= link_to 'マイページ', "/mypage/#{current_user.id}" %>
-  <%= link_to 'お気に入り一覧', "/mypage/#{current_user.id}/favorite/" %>
-<% else %>
-  <!-- ユーザーがログインしていなかった時の処理 -->
-  <h2> 現在ログインしていません </h2>
+<% if user_signed_in? && current_user.is_admin? %>
+  <div class="container py-5">
+    <h1 class="fs-3 mb-5 mt-3">カテゴリー一覧</h1>
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>カテゴリー名</th>
+          <th>編集</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @categories.each do |category| %>
+          <tr>
+            <td><%= category.name %></td>
+            <td><%= link_to "編集", edit_category_path(category.id), class: "btn btn-primary btn-sm" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% if @categories.empty? %>
+      <div class="alert alert-info" role="alert">
+        該当するカテゴリーはありません。
+      </div>
+    <% end %>
+    <%= link_to "カテゴリー登録", new_category_path, class: "btn btn-success mt-3" %>
+  </div>
+
+  <div class="container py-5">
+    <h1 class="fs-3 mb-5 mt-3">ブランド一覧</h1>
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>画像</th>
+          <th>ブランド名</th>
+          <th>編集</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @brands.each do |brand| %>
+          <tr>
+            <td>
+              <% if brand.image.present? %>
+                <%= image_tag brand.image.url, class: "img-fluid", style: "max-height: 100px;", alt: brand.name %>
+              <% else %>
+                <div class="ratio ratio-1x1 bg-secondary text-center d-flex align-items-center justify-content-center" style="max-height: 100px;">
+                  <span class="text-white">No Image</span>
+                </div>
+              <% end %>
+            </td>
+            <td><%= brand.name %></td>
+            <td><%= link_to "編集", edit_brand_path(brand.id), class: "btn btn-primary btn-sm" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% if @brands.empty? %>
+      <div class="alert alert-info" role="alert">
+        該当するブランドはありません。
+      </div>
+    <% end %>
+    <%= link_to "ブランド登録", new_brand_path, class: "btn btn-success mt-3" %>
+  </div>
+
+  <div class="container py-5">
+    <h1 class="fs-3 mb-5 mt-3">アイテム一覧</h1>
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>画像</th>
+          <th>アイテム名</th>
+          <th>価格</th>
+          <th>サイズ</th>
+          <th>詳細</th>
+          <th>編集</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @items.each do |item| %>
+          <tr>
+            <td>
+              <% if item.image.present? %>
+                <%= image_tag item.image.url, class: "img-fluid", style: "max-height: 100px;", alt: item.name %>
+              <% else %>
+                <div class="ratio ratio-1x1 bg-secondary text-center d-flex align-items-center justify-content-center" style="max-height: 100px;">
+                  <span class="text-white">No Image</span>
+                </div>
+              <% end %>
+            </td>
+            <td><%= item.name %></td>
+            <td><%= item.price %>円</td>
+            <td><%= size_to_size_label(item.size) %></td>
+            <td><%= link_to "詳細", item_path(item), class: "btn btn-sm btn-primary" %></td>
+            <td><%= link_to "編集", edit_item_path(item), class: "btn btn-sm btn-warning" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% if @items.empty? %>
+      <div class="alert alert-info" role="alert">
+        該当するアイテムはありません。
+      </div>
+    <% end %>
+    <%= link_to "アイテム登録ページ", new_item_path, class: "btn btn-success mt-3" %>
+  </div>
 <% end %>
