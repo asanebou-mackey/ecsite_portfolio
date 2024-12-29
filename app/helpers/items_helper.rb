@@ -40,9 +40,9 @@ module ItemsHelper
   def gender_to_gender_label(gender)
     if gender == 1
       "男性"
-    elsif size == 2
+    elsif gender == 2
       "女性"
-    elsif size == 9
+    elsif gender == 9
       "その他"
     end
   end
