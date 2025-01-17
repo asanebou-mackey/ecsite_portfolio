@@ -1,12 +1,29 @@
-<p>名前</p>
-<p><%= current_user.name %></p>
-
-<% if @favorites.size != 0 %>
-  <% @favorites.each do |favorite| %>
-    <p><%= image_tag favorite.item.image.url %></p>
-    <p><%= favorite.item.name %></p>
-    <p><%= favorite.item.price %></p>
-  <% end %>
-<% else %>
-  <p>お気に入りはありません。</p>
-<% end %>
+<h1 class="fs-3 mb-5 mt-3">お気に入り一覧</h1>
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% if @favorites.present? %>
+      <% @favorites.each do |favorite| %>
+        <div class="col">
+          <%= link_to item_path(favorite.item.id), class: "card-link text-decoration-none text-dark" do %>
+            <div class="card h-100">
+              <%= image_tag favorite.item.image.url, class: "card-img-top img-fluid", alt: favorite.item.name %>
+              <div class="card-body">
+                <h5 class="card-title"><%= favorite.item.name %></h5>
+                <p class="card-text">価格: <%= favorite.item.price %>円</p>
+                <p class="card-text">サイズ: <%= size_to_size_label(favorite.item.size) %></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center align-items-center py-5">
+            <p class="text-center display-4 text-muted">お気に入りはありません。</p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

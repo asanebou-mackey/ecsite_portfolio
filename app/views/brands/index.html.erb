@@ -1,10 +1,26 @@
-<h1>ブランド一覧ページ</h1>
-<% @brands.each do |brand| %>
-  <p>ブランド名</p>
-  <p><%= brand.name %></p>
-  <p>ブランドロゴ画像</p>
-  <%= image_tag brand.image.url %>
-  <%= link_to '編集ページ', edit_brand_path(brand.id) %>
-  <%= button_to 'ブランド削除', brand_path(brand.id), method: :delete, data: {confirm: "削除しますか？"} %>
-<% end %>
-<%= link_to 'ブランド登録ページ', new_brand_path %>
+<div class="container">
+  <h1>ブランド一覧</h1>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% @brands.each do |brand| %>
+      <div class="col">
+        <div class="card h-100">
+          <% if brand.image.present? %>
+            <%= image_tag brand.image.url, class: "card-img-top img-fluid", alt: brand.name %>
+          <% else %>
+            <div class="ratio ratio-1x1 bg-secondary text-center d-flex align-items-center justify-content-center">
+              <span class="text-white">No Image</span>
+            </div>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= brand.name %></h5>
+            <div class="d-flex justify-content-between align-items-center">
+              <%= link_to '編集', edit_brand_path(brand.id), class: "btn btn-primary btn-sm" %>
+              <%= button_to '削除', brand_path(brand.id), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-sm" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to 'ブランド登録', new_brand_path, class: "btn btn-success mt-3" %>
+</div>

@@ -1,15 +1,18 @@
-<h1>ブランド編集ページ</h1>
-<%= form_with model: @brand do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <div class="field">
-    <%= f.label :name, 'ブランド名' %>
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-  <div class="field">
-    <%= f.label :image, 'ブランドロゴ画像' %>
-    <%= f.file_field :image %>
-  </div>
-  <div>
-    <%= f.submit '編集する' %>
-  </div>
-<% end %>
+<div class="container">
+  <h1>ブランド編集ページ</h1>
+
+  <%= form_with model: @brand do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div class="mb-3">
+      <%= f.label :name, 'ブランド名', class: "form-label" %>
+      <%= f.text_field :name, class: "form-control", autofocus: true %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :image, 'ブランドロゴ画像', class: "form-label" %>
+      <%= f.file_field :image, class: "form-control" %>
+    </div>
+    <div>
+      <%= f.submit '編集する', class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
