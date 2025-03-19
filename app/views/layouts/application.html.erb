@@ -8,25 +8,65 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
 
-  <body>
+  <body style="padding-top: 56px;">
     <header>
-      <nav>
-          <% if user_signed_in? %>
-            <%= link_to 'トップページ', root_path %>
-            <%= link_to 'マイページ', "/mypage/#{current_user.id}" %>
-            <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
-          <% else %>
-            <%= link_to 'トップページ', root_path %>
-            <%= link_to 'サインアップ', new_user_registration_path %>
-            <%= link_to 'ログイン', new_user_session_path %>
-            <%= button_to 'ゲストログイン（閲覧用）', pages_guest_sign_in_path, method: :post %>
-          <% end %>
+      <nav class="navbar bg-light fixed-top">
+        <div class="container-fluid">
+          <%= link_to 'A world of color', root_path, class: "navbar-brand" %>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="navigation-menu">ナビゲーションメニュー</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <%= link_to 'Home', root_path, class: "nav-link active", 'aria-current' => 'page' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to '人気アイテム', items_path(most_favorited: "true"), class: "nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to '新着アイテム', items_path(latest: "true"), class: "nav-link" %>
+                </li>
+                <% unless user_signed_in? %>
+                  <li class="nav-item">
+                    <%= link_to 'サインアップ', new_user_registration_path, class: "nav-link" %>
+                    <%= link_to 'ログイン', new_user_session_path, class: "nav-link" %>
+                  </li>
+                  <li class="nav-item">
+                    <%= button_to 'ゲストログイン（閲覧用）', pages_guest_sign_in_path, method: :post, class: 'nav-link' %>
+                  </li>
+                <% end %>
+                <% if user_signed_in? %>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <p><%= current_user.name %>さん</p>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to 'マイページ', "/mypage/#{current_user.id}", class: "dropdown-item" %></li>
+                    <li><%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: 'dropdown-item' %></li>
+                    <li><%= link_to 'お気に入り一覧', "/mypage/#{current_user.id}/favorite/", class: "dropdown-item" %></li>
+                    <li><%= link_to '注文履歴', mypage_order_path, class: "dropdown-item" %></li>
+                  </ul>
+                </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
       </nav>
     </header>
-    <p class="notice"><%= notice %></p>
+    <p class="notice text-center"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   </body>
 </html>

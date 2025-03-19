@@ -1,5 +1,8 @@
 class PagesController < ApplicationController
   def index
+    @items = Item.all
+    @brands = Brand.all
+    @categories = Category.all
   end
 
   def guest_sign_in

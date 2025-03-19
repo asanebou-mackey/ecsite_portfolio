@@ -1,12 +1,13 @@
-<h1>カテゴリー編集ページ</h1>
-<p>Find me in app/views/categories/edit.html.erb</p>
-<%= form_with model: @category do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <div class="field">
-    <%= f.label :name, 'カテゴリー名' %>
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-  <div>
-    <%= f.submit '編集する' %>
-  </div>
-<% end %>
+<div class="container">
+  <h1>カテゴリー編集ページ</h1>
+  <%= form_with model: @category do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div class="mb-3">
+      <%= f.label :name, 'カテゴリー名', class: "form-label" %>
+      <%= f.text_field :name, class: "form-control", autofocus: true %>
+    </div>
+    <div>
+      <%= f.submit '編集する', class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

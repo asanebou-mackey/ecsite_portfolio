@@ -1,34 +1,78 @@
-<h1>アイテム詳細ページ</h1>
-<p>アイテム画像</p>
-<%= image_tag @item.image.url %>
-<p>アイテム名</p>
-<p><%= @item.name %></p>
-<p>アイテム価格</p>
-<p><%= @item.price %></p>
-<p>アイテム概要</p>
-<p><%= @item.description %></p>
-<p>アイテムサイズ</p>
-<p><%= size_to_size_label(@item.size) %></p>
-<p>アイテムカラー</p>
-<p><%= color_to_color_label(@item.color) %></p>
-<p>性別</p>
-<p><%= gender_to_gender_label(@item.gender) %></p>
-<p>ブランド</p>
-<p><%= @item.brand.name %></p>
-<p>カテゴリー</p>
-<p><%= @item.category.name %></p>
-<p>数量</p>
-<p>1個</p>
-
-<div>
-  <% if @item.favorited_by(current_user).blank? %>
-    <%= button_to "お気に入りに保存", item_favorites_path(@item), method: :post %>
-  <% else %>
-    <%= button_to "保存済み", item_favorite_path(@item,@item.favorited_by(current_user)), method: :delete %>
-  <% end %>
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <%= image_tag @item.image.url, class: "card-img-top img-fluid", alt: @item.name %>
+        <%# サムネイルギャラリーを追加する場合はここに記述 %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title fs-4 fw-bold mb-3"><%= @item.name %></h1>
+          <div class="mb-3">
+            <span class="fs-5 fw-bold"><%= number_with_delimiter(@item.price) %></span><span class="ms-1">円（税込）</span>
+          </div>
+          <p class="card-text mb-4"><%= @item.description %></p>
+          <hr class="mb-4">
+          <div class="mb-4">
+            <div class="mb-2">
+              <label class="form-label fw-bold">サイズ</label><br>
+              <div class="btn-group" role="group" aria-label="Item Size">
+                <button type="button" class="btn btn-outline-secondary disabled">
+                  <%= size_to_size_label(@item.size) %>
+                </button>
+              </div>
+            </div>
+            <div class="mb-2">
+              <label class="form-label fw-bold">カラー</label><br>
+              <div class="btn-group" role="group" aria-label="Item Size">
+                <button type="button" class="btn btn-outline-secondary disabled">
+                  <%= color_to_color_label(@item.color) %>
+                </button>
+              </div>
+            </div>
+          </div>
+          <hr class="mb-4">
+          <dl class="row mb-4">
+            <dt class="col-sm-3 fw-bold">ブランド</dt>
+            <dd class="col-sm-9"><%= @item.brand.name %></dd>
+            <dt class="col-sm-3 fw-bold">カテゴリー</dt>
+            <dd class="col-sm-9"><%= @item.category.name %></dd>
+            <dt class="col-sm-3 fw-bold">性別</dt>
+            <dd class="col-sm-9"><%= gender_to_gender_label(@item.gender) %></dd>
+          </dl>
+          <div class="mb-4">
+            <div class="row g-2">
+              <div class="col-auto">
+                <div class="d-grid">
+                  <%= form_with model: @cart do |f| %>
+                    <%= f.hidden_field :item_id, value: @item.id %>
+                    <%= f.submit "カートに入れる", class: "btn btn-success btn-lg" %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="col-auto">
+                <div class="d-grid">
+                  <% if current_user.present? && @item.favorited_by(current_user).present? %>
+                    <%= button_to item_favorite_path(@item, @item.favorited_by(current_user)), method: :delete, class: "btn btn-outline-secondary btn-lg" do %>
+                      <i class="fa-solid fa-heart" style="color: #ff0000;"></i>
+                    <% end %>
+                  <% elsif current_user.present? %>
+                    <%= button_to item_favorites_path(@item), method: :post, class: "btn btn-outline-secondary btn-lg" do %>
+                      <i class="fa-regular fa-heart me-0"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to new_user_session_path, class: "btn btn-outline-secondary btn-lg" do %>
+                      <i class="fa-regular fa-heart me-0"></i>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<%= form_with model: @cart do |f| %>
-  <%= f.hidden_field :item_id, :value => @item.id %>
-  <%= f.submit "カートに入れる" %>
-<% end %>

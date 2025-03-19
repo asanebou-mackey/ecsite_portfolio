@@ -1,16 +1,33 @@
-<h1>マイページ</h1>
-<p>プロフィール画像</p>
-<% if current_user.image.present? %>
-  <%= image_tag current_user.image_url %>
-<% else %>
-  <%= image_tag "default_icon.png" %>
-<% end %>
-<p>名前</p>
-<p><%= current_user.name %></p>
-<p>電話番号</p>
-<p><%= current_user.number %></p>
-<p>住所</p>
-<p><%= current_user.address %></p>
-<p>Eメール</p>
-<p><%= current_user.email %></p>
-<%= link_to '編集する', edit_user_registration_path %>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card mb-4">
+        <div class="card-body text-center"> <%# カードと中央揃えを追加 %>
+          <p class="card-title">プロフィール画像</p>
+          <% if current_user.image.present? %>
+            <%= image_tag current_user.image_url, class: "img-fluid rounded-circle mb-3", style: "max-width: 200px;", alt: "プロフィール画像" %>
+          <% else %>
+            <%= image_tag "default_icon.png", class: "img-fluid rounded-circle mb-3", style: "max-width: 200px;", alt: "デフォルトアイコン" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="card mb-4">
+        <div class="card-body">
+          <dl class="row">
+            <dt class="col-sm-4 col-md-3 fw-bold">名前</dt>
+            <dd class="col-sm-8 col-md-9"><%= current_user.name %></dd>
+            <dt class="col-sm-4 col-md-3 fw-bold">電話番号</dt>
+            <dd class="col-sm-8 col-md-9"><%= current_user.number || "未登録" %></dd>
+            <dt class="col-sm-4 col-md-3 fw-bold">住所</dt>
+            <dd class="col-sm-8 col-md-9"><%= current_user.address || "未登録" %></dd>
+            <dt class="col-sm-4 col-md-3 fw-bold">Eメール</dt>
+            <dd class="col-sm-8 col-md-9"><%= current_user.email %></dd>
+          </dl>
+        </div>
+      </div>
+      <div class="d-grid justify-content-center"> <%# ボタンを囲むdivを追加 %>
+        <%= link_to '編集する', edit_user_registration_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
