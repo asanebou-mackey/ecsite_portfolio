@@ -1,24 +1,42 @@
-# README
+# A world of color
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+---
 
-Things you may want to cover:
+## アプリケーションの概要
 
-* Ruby version
+「A world of color」は、黒色以外の個性豊かな服や柄物を求めるユーザーのためのオンラインセレクトショップです。
+いつも無意識に黒色の服を選んでしまいがちな方や、クローゼットに彩りを加えたいと考えている方をターゲットに、様々な色やデザインの服を提案します。
 
-* System dependencies
+## 主な機能
 
-* Configuration
+「A world of color」では、以下の機能を提供しています。
 
-* Database creation
+### ユーザー向け機能
+* **ログイン / ログアウト機能**: Devise を利用したセキュアなユーザー認証。
+* **ゲストログイン機能**: メールアドレス登録不要で手軽にサービスを体験。
+* **ユーザー情報の表示 / 編集機能**: プロフィール情報の確認・更新。
+* **お気に入り機能**: 気になった商品を保存し、後で簡単に確認。
+* **商品注文機能**: カートに入れた商品を注文。
+* **商品注文履歴の表示**: 過去の購入履歴を確認。
+* **新着商品 / 人気商品 (お気に入りの数) 表示**: 最新の商品や注目度の高い商品をチェック。
+* **条件豊富な検索機能**: 色、価格、ブランド、カテゴリなど複数の条件で商品を絞り込み。
 
-* Database initialization
+### 管理者向け機能
+* **商品登録・編集機能**: 新商品の追加や既存商品の情報更新。
+* **ブランド登録・編集機能**: 取り扱いブランドの管理。
+* **カテゴリ登録・編集機能**: 商品カテゴリの管理。
 
-* How to run the test suite
+---
 
-* Services (job queues, cache servers, search engines, etc.)
+## 使用技術
 
-* Deployment instructions
+* **言語**: Ruby
+* **フレームワーク**: Ruby on Rails 6
+* **デプロイ**: Heroku
 
-* ...
+---
+
+## デプロイ先URL
+https://heroku-deploy-ecsite-portfolio-47b86cc26295.herokuapp.com/
+
+---
